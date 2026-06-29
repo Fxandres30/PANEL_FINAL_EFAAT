@@ -1,29 +1,64 @@
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
+    try {
 
-    const { sessionId } = await req.json();
+        const { sessionId } = await req.json();
 
-    const res = await fetch("http://localhost:4000/sessions/connect", {
+        const BOT_API_URL = process.env.BOT_API_URL;
 
-        method: "POST",
+        if (!BOT_API_URL) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    message: "BOT_API_URL no está configurada."
+                },
+                {
+                    status: 500
+                }
+            );
+        }
 
-        headers: {
+        const res = await fetch(`${BOT_API_URL}/sessions/connect`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                sessionId
+            })
+        });
 
-            "Content-Type": "application/json"
+        const text = await res.text();
 
-        },
+        if (!res.ok) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    message: text || "Error al conectar con el bot."
+                },
+                {
+                    status: res.status
+                }
+            );
+        }
 
-        body: JSON.stringify({
+        const data = text ? JSON.parse(text) : {};
 
-            sessionId
+        return NextResponse.json(data);
 
-        })
+    } catch (error: any) {
 
-    });
+        console.error(error);
 
-    const data = await res.json();
-
-    return NextResponse.json(data);
-
+        return NextResponse.json(
+            {
+                success: false,
+                message: error.message || "Error interno del servidor."
+            },
+            {
+                status: 500
+            }
+        );
+    }
 }
