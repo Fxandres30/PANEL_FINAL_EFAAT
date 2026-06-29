@@ -1,0 +1,340 @@
+.session-card{
+
+    position: relative;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+    background:#ffffff;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:22px;
+
+    padding:24px;
+
+    min-height:280px;
+
+    transition:.30s ease;
+
+    overflow:hidden;
+
+}
+
+.session-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:5px;
+
+    background:linear-gradient(
+        90deg,
+        #25D366,
+        #1fb154
+    );
+
+}
+
+.session-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.08);
+
+    border-color:#d1d5db;
+
+}
+
+.session-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    margin-bottom:25px;
+
+}
+
+.session-logo{
+
+    width:68px;
+
+    height:68px;
+
+    border-radius:18px;
+
+    background:#25D366;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#fff;
+
+    font-size:34px;
+
+    box-shadow:
+
+        0 10px 25px rgba(37,211,102,.30);
+
+}
+
+.session-status{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+}
+
+.connected{
+
+    background:#dcfce7;
+
+    color:#15803d;
+
+}
+
+.disconnected{
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+}
+
+.pulse{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:currentColor;
+
+    animation:pulse 1.8s infinite;
+
+}
+
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(.9);
+
+        opacity:1;
+
+    }
+
+    70%{
+
+        transform:scale(1.7);
+
+        opacity:.25;
+
+    }
+
+    100%{
+
+        transform:scale(.9);
+
+        opacity:1;
+
+    }
+
+}
+
+.session-content{
+
+    flex:1;
+
+}
+
+.session-content h3{
+
+    margin:0;
+
+    font-size:24px;
+
+    color:#111827;
+
+    font-weight:700;
+
+}
+
+.principal-badge{
+
+    margin-top:12px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:7px 14px;
+
+    border-radius:999px;
+
+    background:#fff8e6;
+
+    color:#d97706;
+
+    font-size:13px;
+
+    font-weight:700;
+
+}
+
+.phone-box{
+
+    margin-top:30px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:18px;
+
+    border-radius:16px;
+
+    background:#f8fafc;
+
+    border:1px solid #e5e7eb;
+
+}
+
+.phone-box svg{
+
+    color:#25D366;
+
+    font-size:18px;
+
+}
+
+.phone-box span{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:#111827;
+
+    word-break:break-all;
+
+}
+
+.session-footer{
+
+    margin-top:30px;
+
+}
+
+.btn-action{
+
+    width:100%;
+
+    height:54px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:12px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.btn-action:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-2px);
+
+}
+
+.btn-action:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+}
+
+@media(max-width:768px){
+
+    .session-card{
+
+        padding:20px;
+
+    }
+
+    .session-logo{
+
+        width:58px;
+
+        height:58px;
+
+        font-size:28px;
+
+    }
+
+    .session-content h3{
+
+        font-size:20px;
+
+    }
+
+    .phone-box span{
+
+        font-size:16px;
+
+    }
+
+}
