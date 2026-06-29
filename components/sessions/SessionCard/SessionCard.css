@@ -338,3 +338,8 @@
     }
 
 }
+
+.session-status.waiting{
+    background:#fff7d6;
+    color:#b7791f;
+}

@@ -2,8 +2,6 @@
 
 import "./QRModal.css";
 
-import { disconnectSession } from "@/services/sessions/disconnectSession";
-
 type Props = {
     open: boolean;
     qr: string;
@@ -33,17 +31,7 @@ export default function QRModal({
 
     }
 
-    async function cerrar() {
-
-        try {
-
-            await disconnectSession(sessionId);
-
-        } catch (e) {
-
-            console.error(e);
-
-        }
+    function cerrar() {
 
         onClose();
 
@@ -84,11 +72,8 @@ export default function QRModal({
                 <div className="qr-box">
 
                     <img
-
                         src={qr}
-
                         alt="QR"
-
                     />
 
                 </div>
@@ -104,7 +89,9 @@ export default function QRModal({
                 <p className="warning">
 
                     El código QR cambia automáticamente cada pocos segundos.
+
                     <br />
+
                     Si expira, se actualizará sin necesidad de recargar la página.
 
                 </p>
@@ -112,11 +99,8 @@ export default function QRModal({
                 <div className="buttons">
 
                     <button
-
                         className="share"
-
                         onClick={copiarEnlace}
-
                     >
 
                         📤 Compartir enlace
@@ -124,14 +108,11 @@ export default function QRModal({
                     </button>
 
                     <button
-
                         className="close"
-
                         onClick={cerrar}
-
                     >
 
-                        ❌ Cancelar conexión
+                        ✖ Cerrar
 
                     </button>
 

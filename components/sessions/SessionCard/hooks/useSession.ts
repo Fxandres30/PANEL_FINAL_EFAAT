@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 
 import { connectSession } from "@/services/sessions/connectSession";
+import { disconnectSession } from "@/services/sessions/disconnectSession";
 import { getSession } from "@/services/sessions/getSession";
 
 export function useSession(
@@ -32,19 +33,30 @@ export function useSession(
         if (loading)
             return;
 
-        if (estadoActual === "conectado")
+        // ==========================
+        // DESCONECTAR
+        // ==========================
+        if (estadoActual === "conectado") {
+
+            setLoading(true);
+
+            await disconnectSession(id);
+
             return;
 
+        }
+
+        // ==========================
+        // MOSTRAR QR
+        // ==========================
         if (estadoActual === "esperando_qr") {
 
-            const { data } =
-                await getSession(id);
+            const { data } = await getSession(id);
 
-            if (data?.qr) {
+            if (!data?.qr)
+                return;
 
-                setQr(data.qr);
-
-            }
+            setQr(data.qr);
 
             setOpen(true);
 
@@ -52,6 +64,9 @@ export function useSession(
 
         }
 
+        // ==========================
+        // CONECTAR
+        // ==========================
         setLoading(true);
 
         await connectSession(id);
@@ -61,10 +76,10 @@ export function useSession(
     function textoBoton() {
 
         if (loading)
-            return "Generando QR...";
+            return "Procesando...";
 
         if (estadoActual === "conectado")
-            return "Conectado";
+            return "Desconectar";
 
         if (estadoActual === "esperando_qr")
             return "Ver QR";
@@ -89,14 +104,16 @@ export function useSession(
                 },
                 (payload: any) => {
 
-                    const sesion =
-                        payload.new;
+                    const sesion = payload.new;
 
                     setEstadoActual(
                         sesion.estado
                     );
 
-                    if (sesion.qr) {
+                    if (
+                        sesion.estado === "esperando_qr" &&
+                        sesion.qr
+                    ) {
 
                         setQr(sesion.qr);
 
@@ -105,11 +122,22 @@ export function useSession(
                     }
 
                     if (
-                        sesion.estado ===
-                        "conectado"
+                        sesion.estado === "conectado"
                     ) {
 
                         setOpen(false);
+
+                        setQr("");
+
+                    }
+
+                    if (
+                        sesion.estado === "desconectado"
+                    ) {
+
+                        setOpen(false);
+
+                        setQr("");
 
                     }
 

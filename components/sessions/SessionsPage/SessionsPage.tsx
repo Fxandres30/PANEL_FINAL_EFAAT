@@ -92,26 +92,12 @@ export default function SessionsPage() {
 sessions.map((session:any)=>(
 
 <SessionCard
-
     key={session.id}
-
     id={session.id}
-
     nombre={session.nombre}
-
-    telefono={
-        session.telefono ||
-        "Sin conectar"
-    }
-
-    estado={
-        session.estado==="conectado"
-        ? "Conectado"
-        : "Desconectado"
-    }
-
+    telefono={session.telefono || "Sin conectar"}
+    estado={session.estado}
     principal={session.principal}
-
 />
 
 ))

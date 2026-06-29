@@ -10,7 +10,8 @@ import {
     FaCrown,
     FaPhoneAlt,
     FaPowerOff,
-    FaPlug
+    FaPlug,
+    FaQrcode
 } from "react-icons/fa";
 
 interface Props {
@@ -53,9 +54,17 @@ export default function SessionCard({
 
         accionPrincipal,
 
+        textoBoton,
+
         cerrarQR
 
     } = useSession(id, estado);
+
+    const conectado =
+        estadoActual === "conectado";
+
+    const esperandoQR =
+        estadoActual === "esperando_qr";
 
     return (
 
@@ -73,8 +82,10 @@ export default function SessionCard({
 
                     <div
                         className={`session-status ${
-                            estadoActual === "conectado"
+                            conectado
                                 ? "connected"
+                                : esperandoQR
+                                ? "waiting"
                                 : "disconnected"
                         }`}
                     >
@@ -83,9 +94,13 @@ export default function SessionCard({
 
                         {
 
-                            estadoActual === "conectado"
+                            conectado
 
                                 ? "Conectado"
+
+                                : esperandoQR
+
+                                ? "Esperando QR"
 
                                 : "Desconectado"
 
@@ -153,27 +168,41 @@ export default function SessionCard({
 
                         {
 
-                            estadoActual === "conectado"
+                            conectado
 
-                            ?
+                                ?
 
-                            <>
+                                <>
 
-                                <FaPowerOff />
+                                    <FaPowerOff />
 
-                                Desconectar
+                                    {textoBoton()}
 
-                            </>
+                                </>
 
-                            :
+                                :
 
-                            <>
+                                esperandoQR
 
-                                <FaPlug />
+                                ?
 
-                                Conectar
+                                <>
 
-                            </>
+                                    <FaQrcode />
+
+                                    {textoBoton()}
+
+                                </>
+
+                                :
+
+                                <>
+
+                                    <FaPlug />
+
+                                    {textoBoton()}
+
+                                </>
 
                         }
 
