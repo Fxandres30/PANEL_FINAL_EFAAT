@@ -1,8 +1,18 @@
 "use client";
 
+import { useState } from "react";
+
 import "./SessionCard.css";
 
+import SessionRenameModal
+from "../SessionRenameModal/SessionRenameModal";
+
+import DeleteSessionModal
+from "../DeleteSessionModal/DeleteSessionModal";
+
 import QRModal from "../QRModal/QRModal";
+import SessionMenu from "../SessionMenu/SessionMenu";
+
 import { useSession } from "./hooks/useSession";
 
 import {
@@ -11,7 +21,8 @@ import {
     FaPhoneAlt,
     FaPowerOff,
     FaPlug,
-    FaQrcode
+    FaQrcode,
+    FaCog
 } from "react-icons/fa";
 
 interface Props {
@@ -66,19 +77,20 @@ export default function SessionCard({
     const esperandoQR =
         estadoActual === "esperando_qr";
 
+        const [renameOpen, setRenameOpen] = useState(false);
+
+const [deleteOpen, setDeleteOpen] = useState(false);
+
+
     return (
 
         <>
 
             <div className="session-card">
 
-                <div className="session-top">
+                {/* HEADER */}
 
-                    <div className="session-logo">
-
-                        <FaWhatsapp />
-
-                    </div>
+                <div className="session-header">
 
                     <div
                         className={`session-status ${
@@ -108,9 +120,47 @@ export default function SessionCard({
 
                     </div>
 
+<SessionMenu
+
+    sessionId={id}
+
+    nombre={nombre}
+
+    principal={principal}
+
+    conectado={conectado}
+
+    esperandoQR={esperandoQR}
+
+    onRename={() => setRenameOpen(true)}
+
+    onDelete={() => setDeleteOpen(true)}
+
+    onPrincipal={() => {
+
+        // después
+
+    }}
+
+    onReconnect={() => {
+
+        // después
+
+    }}
+
+/>
+
                 </div>
 
-                <div className="session-content">
+                {/* BODY */}
+
+                <div className="session-body">
+
+                    <div className="session-logo">
+
+                        <FaWhatsapp />
+
+                    </div>
 
                     <h3>
 
@@ -122,13 +172,13 @@ export default function SessionCard({
 
                         principal && (
 
-                            <div className="principal-badge">
+                            <span className="badge">
 
                                 <FaCrown />
 
                                 Principal
 
-                            </div>
+                            </span>
 
                         )
 
@@ -154,11 +204,13 @@ export default function SessionCard({
 
                 </div>
 
-                <div className="session-footer">
+                {/* BOTONES */}
+
+                <div className="session-actions">
 
                     <button
 
-                        className="btn-action"
+                        className="primary-btn"
 
                         disabled={loading}
 
@@ -208,6 +260,18 @@ export default function SessionCard({
 
                     </button>
 
+                    <button
+
+                        className="secondary-btn"
+
+                    >
+
+                        <FaCog />
+
+                        Administrar
+
+                    </button>
+
                 </div>
 
             </div>
@@ -223,6 +287,29 @@ export default function SessionCard({
                 onClose={cerrarQR}
 
             />
+            <SessionRenameModal
+
+    open={renameOpen}
+
+    sessionId={id}
+
+    nombreActual={nombre}
+
+    onClose={() => setRenameOpen(false)}
+
+/>
+
+<DeleteSessionModal
+
+    open={deleteOpen}
+
+    sessionId={id}
+
+    nombre={nombre}
+
+    onClose={() => setDeleteOpen(false)}
+
+/>
 
         </>
 

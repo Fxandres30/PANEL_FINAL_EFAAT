@@ -47,7 +47,7 @@ export function useSession(
         }
 
         // ==========================
-        // MOSTRAR QR
+        // VER QR
         // ==========================
         if (estadoActual === "esperando_qr") {
 
@@ -100,7 +100,7 @@ export function useSession(
                     event: "UPDATE",
                     schema: "public",
                     table: "sesiones",
-                    filter: `id=eq.${id}`,
+                    filter: `id=eq.${id}`
                 },
                 (payload: any) => {
 
@@ -110,17 +110,24 @@ export function useSession(
                         sesion.estado
                     );
 
+                    // ==========================
+                    // ACTUALIZAR QR
+                    // ==========================
                     if (
                         sesion.estado === "esperando_qr" &&
                         sesion.qr
                     ) {
 
-                        setQr(sesion.qr);
+                        // Solo actualiza la imagen.
+                        // No abre el modal.
 
-                        setOpen(true);
+                        setQr(sesion.qr);
 
                     }
 
+                    // ==========================
+                    // CONECTADO
+                    // ==========================
                     if (
                         sesion.estado === "conectado"
                     ) {
@@ -131,6 +138,9 @@ export function useSession(
 
                     }
 
+                    // ==========================
+                    // DESCONECTADO
+                    // ==========================
                     if (
                         sesion.estado === "desconectado"
                     ) {
@@ -144,6 +154,7 @@ export function useSession(
                     setLoading(false);
 
                 }
+
             )
 
             .subscribe();

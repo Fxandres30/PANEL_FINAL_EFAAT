@@ -2,6 +2,8 @@
 
 import "./QRModal.css";
 
+import { useEffect, useState } from "react";
+
 type Props = {
     open: boolean;
     qr: string;
@@ -18,7 +20,39 @@ export default function QRModal({
 
 }: Props) {
 
-    if (!open) return null;
+    const [segundos, setSegundos] = useState(120);
+
+    useEffect(() => {
+
+        if (!open)
+            return;
+
+        setSegundos(120);
+
+        const interval = setInterval(() => {
+
+            setSegundos((valor) => {
+
+                if (valor <= 1) {
+
+                    clearInterval(interval);
+
+                    return 0;
+
+                }
+
+                return valor - 1;
+
+            });
+
+        }, 1000);
+
+        return () => clearInterval(interval);
+
+    }, [open]);
+
+    if (!open)
+        return null;
 
     async function copiarEnlace() {
 
@@ -36,6 +70,12 @@ export default function QRModal({
         onClose();
 
     }
+
+    const minutos =
+        String(Math.floor(segundos / 60)).padStart(2, "0");
+
+    const segundosTexto =
+        String(segundos % 60).padStart(2, "0");
 
     return (
 
@@ -72,8 +112,11 @@ export default function QRModal({
                 <div className="qr-box">
 
                     <img
+
                         src={qr}
+
                         alt="QR"
+
                     />
 
                 </div>
@@ -83,6 +126,18 @@ export default function QRModal({
                     <span className="pulse"></span>
 
                     Esperando conexión...
+
+                </div>
+
+                <div className="qr-timer">
+
+                    ⏱ Tiempo restante
+
+                    <strong>
+
+                        {minutos}:{segundosTexto}
+
+                    </strong>
 
                 </div>
 
@@ -99,8 +154,11 @@ export default function QRModal({
                 <div className="buttons">
 
                     <button
+
                         className="share"
+
                         onClick={copiarEnlace}
+
                     >
 
                         📤 Compartir enlace
@@ -108,8 +166,11 @@ export default function QRModal({
                     </button>
 
                     <button
+
                         className="close"
+
                         onClick={cerrar}
+
                     >
 
                         ✖ Cerrar
