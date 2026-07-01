@@ -15,6 +15,8 @@ import SessionMenu from "../SessionMenu/SessionMenu";
 
 import { useSession } from "./hooks/useSession";
 
+import { setActiveSession } from "@/services/sessions/setActiveSession";
+
 import {
     FaWhatsapp,
     FaCrown,
@@ -37,6 +39,8 @@ interface Props {
 
     principal: boolean;
 
+    activa: boolean;
+
 }
 
 export default function SessionCard({
@@ -49,7 +53,9 @@ export default function SessionCard({
 
     estado,
 
-    principal
+    principal,
+
+    activa
 
 }: Props) {
 
@@ -132,22 +138,23 @@ const [deleteOpen, setDeleteOpen] = useState(false);
 
     esperandoQR={esperandoQR}
 
+    activa={false}
+
     onRename={() => setRenameOpen(true)}
 
     onDelete={() => setDeleteOpen(true)}
 
-    onPrincipal={() => {
+    onPrincipal={() => {}}
 
-        // después
+    onReconnect={() => {}}
 
-    }}
+    onUseSession={async () => {
 
-    onReconnect={() => {
+    const res = await setActiveSession(id);
 
-        // después
+    console.log(res);
 
-    }}
-
+}}
 />
 
                 </div>

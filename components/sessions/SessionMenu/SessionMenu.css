@@ -83,3 +83,67 @@
     color:#e53935;
 
 }
+
+.active-session{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:10px 14px;
+
+    border:none;
+
+    background:#ecfdf5;
+
+    color:#16a34a;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    cursor:default;
+
+    border-radius:8px;
+
+    opacity:1;
+
+}
+
+.menu-dropdown button{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:10px 14px;
+
+    border:none;
+
+    background:white;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.menu-dropdown button:hover{
+
+    background:#f5f5f5;
+
+}
+
+.menu-dropdown .danger{
+
+    color:#ef4444;
+
+}

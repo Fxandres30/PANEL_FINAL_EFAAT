@@ -28,6 +28,8 @@ type Props = {
 
     esperandoQR: boolean;
 
+    activa: boolean;
+
     onRename: () => void;
 
     onDelete: () => void;
@@ -36,17 +38,21 @@ type Props = {
 
     onReconnect: () => void;
 
+    onUseSession: () => void;
+
 };
 
 export default function SessionMenu({
 
     sessionId,
     principal,
+    activa,
 
     onRename,
     onDelete,
     onPrincipal,
-    onReconnect
+    onReconnect,
+    onUseSession
 
 }: Props) {
 
@@ -92,31 +98,79 @@ export default function SessionMenu({
 
                         </button>
 
-                        <button
+                        
+            <button
 
-                            onClick={() => {
+    onClick={() => {
 
-                                setOpen(false);
+        setOpen(false);
 
-                                onPrincipal();
+        onPrincipal();
 
-                            }}
+    }}
 
-                        >
+>
 
-                            <FaStar />
+    <FaStar />
 
-                            {
+    {
 
-                                principal
+        principal
 
-                                    ? "Quitar principal"
+            ? "Quitar principal"
 
-                                    : "Hacer principal"
+            : "Hacer principal"
 
-                            }
+    }
 
-                        </button>
+</button>
+
+{
+
+    !activa && (
+
+        <button
+
+            onClick={() => {
+
+                setOpen(false);
+
+                onUseSession();
+
+            }}
+
+        >
+
+            <FaStar />
+
+            Usar esta sesión
+
+        </button>
+
+    )
+
+}
+
+{
+
+    activa && (
+
+        <button
+
+            disabled
+
+            className="active-session"
+
+        >
+
+            ⭐ Sesión activa
+
+        </button>
+
+    )
+
+}
+
 
                         <button
 

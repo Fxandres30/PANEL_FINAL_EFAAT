@@ -98,6 +98,7 @@ sessions.map((session:any)=>(
     telefono={session.telefono || "Sin conectar"}
     estado={session.estado}
     principal={session.principal}
+    activa={session.activa}
 />
 
 ))
