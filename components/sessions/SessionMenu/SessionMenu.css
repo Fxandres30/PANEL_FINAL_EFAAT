@@ -2,57 +2,106 @@
 
     position:relative;
 
+    display:flex;
+
+    justify-content:flex-end;
+
+    z-index:9999;
+
 }
+/* ========================= */
+/* Botón */
+/* ========================= */
 
 .menu-btn{
 
-    width:38px;
+    width:40px;
 
-    height:38px;
+    height:40px;
 
     border:none;
 
-    border-radius:10px;
+    border-radius:12px;
 
-    background:#f4f5f8;
+    background:#F8FAFC;
+
+    color:#4B5563;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
 
     cursor:pointer;
 
-    transition:.2s;
+    transition:.25s;
 
 }
 
 .menu-btn:hover{
 
-    background:#e9ecf3;
+    background:#EEF2FF;
+
+    color:#2563EB;
+
+    transform:scale(1.05);
 
 }
+
+.menu-btn svg{
+
+    font-size:15px;
+
+}
+
+/* ========================= */
+/* Dropdown */
+/* ========================= */
 
 .menu-dropdown{
 
     position:absolute;
 
+    top:48px;
+
     right:0;
 
-    top:45px;
-
-    width:220px;
+    width:250px;
 
     background:#fff;
 
-    border-radius:14px;
+    border-radius:18px;
 
-    box-shadow:0 15px 40px rgba(0,0,0,.12);
+    border:1px solid #E5E7EB;
 
-    overflow:hidden;
+    padding:10px;
 
-    z-index:999;
+    box-shadow:
+
+        0 20px 45px rgba(0,0,0,.12);
+
+    z-index:99999;
+
+    animation:menuShow .18s ease;
 
 }
+
+/* ========================= */
+/* Opciones */
+/* ========================= */
 
 .menu-dropdown button{
 
     width:100%;
+
+    height:42px;
+
+    border:none;
+
+    background:none;
+
+    border-radius:12px;
 
     display:flex;
 
@@ -60,90 +109,46 @@
 
     gap:12px;
 
-    border:none;
-
-    background:white;
-
-    padding:14px 18px;
+    padding:0 14px;
 
     cursor:pointer;
 
     font-size:14px;
 
-}
+    font-weight:500;
 
-.menu-dropdown button:hover{
+    color:#374151;
 
-    background:#f6f8fb;
-
-}
-
-.menu-dropdown .danger{
-
-    color:#e53935;
-
-}
-
-.active-session{
-
-    width:100%;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    padding:10px 14px;
-
-    border:none;
-
-    background:#ecfdf5;
-
-    color:#16a34a;
-
-    font-size:14px;
-
-    font-weight:600;
-
-    cursor:default;
-
-    border-radius:8px;
-
-    opacity:1;
-
-}
-
-.menu-dropdown button{
-
-    width:100%;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    padding:10px 14px;
-
-    border:none;
-
-    background:white;
-
-    cursor:pointer;
-
-    transition:.2s;
+    transition:.18s;
 
 }
 
 .menu-dropdown button:hover{
 
-    background:#f5f5f5;
+    background:#F8FAFC;
 
 }
 
-.menu-dropdown .danger{
+/* ========================= */
+/* Animación */
+/* ========================= */
 
-    color:#ef4444;
+@keyframes menuShow{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(-8px) scale(.97);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
 
 }

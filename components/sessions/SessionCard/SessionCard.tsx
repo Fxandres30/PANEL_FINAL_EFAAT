@@ -4,28 +4,17 @@ import { useState } from "react";
 
 import "./SessionCard.css";
 
-import SessionRenameModal
-from "../SessionRenameModal/SessionRenameModal";
+import SessionStatus from "./components/SessionStatus/SessionStatus";
+import SessionBotStatus from "./components/SessionBotStatus/SessionBotStatus";
+import SessionBody from "./components/SessionBody/SessionBody";
+import SessionActions from "./components/SessionActions/SessionActions";
+import SessionModals from "./components/SessionModals/SessionModals";
 
-import DeleteSessionModal
-from "../DeleteSessionModal/DeleteSessionModal";
-
-import QRModal from "../QRModal/QRModal";
 import SessionMenu from "../SessionMenu/SessionMenu";
 
 import { useSession } from "./hooks/useSession";
 
 import { setActiveSession } from "@/services/sessions/setActiveSession";
-
-import {
-    FaWhatsapp,
-    FaCrown,
-    FaPhoneAlt,
-    FaPowerOff,
-    FaPlug,
-    FaQrcode,
-    FaCog
-} from "react-icons/fa";
 
 interface Props {
 
@@ -83,240 +72,104 @@ export default function SessionCard({
     const esperandoQR =
         estadoActual === "esperando_qr";
 
-        const [renameOpen, setRenameOpen] = useState(false);
+    const statusClass =
+        conectado
+            ? "connected"
+            : esperandoQR
+            ? "waiting"
+            : "disconnected";
 
-const [deleteOpen, setDeleteOpen] = useState(false);
+    const [renameOpen, setRenameOpen] = useState(false);
 
+    const [deleteOpen, setDeleteOpen] = useState(false);
 
     return (
 
         <>
 
-            <div className="session-card">
-
-                {/* HEADER */}
+            <div className={`session-card ${statusClass}`}>
 
                 <div className="session-header">
 
-                    <div
-                        className={`session-status ${
-                            conectado
-                                ? "connected"
-                                : esperandoQR
-                                ? "waiting"
-                                : "disconnected"
-                        }`}
-                    >
+                    <SessionStatus
+                        conectado={conectado}
+                        esperandoQR={esperandoQR}
+                    />
 
-                        <span className="pulse"></span>
+                    <SessionMenu
+                        sessionId={id}
+                        nombre={nombre}
+                        principal={principal}
+                        conectado={conectado}
+                        esperandoQR={esperandoQR}
+                        activa={activa}
+                        onRename={() => setRenameOpen(true)}
+                        onDelete={() => setDeleteOpen(true)}
+                        onPrincipal={() => {}}
+                        onReconnect={() => {}}
+                        onUseSession={async () => {
 
-                        {
+                            const res =
+                                await setActiveSession(id);
 
-                            conectado
+                            console.log(res);
 
-                                ? "Conectado"
+                        }}
+                    />
 
-                                : esperandoQR
+                </div>
 
-                                ? "Esperando QR"
+                <SessionBotStatus
+                    activa={activa}
+                    principal={principal}
+                />
 
-                                : "Desconectado"
+                <SessionBody
+                    nombre={nombre}
+                    telefono={telefono}
+                    principal={principal}
+                />
 
-                        }
-
-                    </div>
-
-<SessionMenu
-
-    sessionId={id}
-
-    nombre={nombre}
-
-    principal={principal}
-
+                <SessionActions
     conectado={conectado}
-
     esperandoQR={esperandoQR}
+    loading={loading}
+    activa={activa}
+    accionPrincipal={accionPrincipal}
+    textoBoton={textoBoton}
+    seleccionarSesion={async () => {
 
-    activa={false}
+        try {
 
-    onRename={() => setRenameOpen(true)}
+            await setActiveSession(id);
 
-    onDelete={() => setDeleteOpen(true)}
+            // Opcional
+            window.location.reload();
 
-    onPrincipal={() => {}}
+        }
 
-    onReconnect={() => {}}
+        catch (error) {
 
-    onUseSession={async () => {
+            console.error(error);
 
-    const res = await setActiveSession(id);
+        }
 
-    console.log(res);
-
-}}
+    }}
 />
-
-                </div>
-
-                {/* BODY */}
-
-                <div className="session-body">
-
-                    <div className="session-logo">
-
-                        <FaWhatsapp />
-
-                    </div>
-
-                    <h3>
-
-                        {nombre}
-
-                    </h3>
-
-                    {
-
-                        principal && (
-
-                            <span className="badge">
-
-                                <FaCrown />
-
-                                Principal
-
-                            </span>
-
-                        )
-
-                    }
-
-                    <div className="phone-box">
-
-                        <FaPhoneAlt />
-
-                        <span>
-
-                            {
-
-                                telefono ||
-
-                                "Sin conectar"
-
-                            }
-
-                        </span>
-
-                    </div>
-
-                </div>
-
-                {/* BOTONES */}
-
-                <div className="session-actions">
-
-                    <button
-
-                        className="primary-btn"
-
-                        disabled={loading}
-
-                        onClick={accionPrincipal}
-
-                    >
-
-                        {
-
-                            conectado
-
-                                ?
-
-                                <>
-
-                                    <FaPowerOff />
-
-                                    {textoBoton()}
-
-                                </>
-
-                                :
-
-                                esperandoQR
-
-                                ?
-
-                                <>
-
-                                    <FaQrcode />
-
-                                    {textoBoton()}
-
-                                </>
-
-                                :
-
-                                <>
-
-                                    <FaPlug />
-
-                                    {textoBoton()}
-
-                                </>
-
-                        }
-
-                    </button>
-
-                    <button
-
-                        className="secondary-btn"
-
-                    >
-
-                        <FaCog />
-
-                        Administrar
-
-                    </button>
-
-                </div>
 
             </div>
 
-            <QRModal
-
-                open={open}
-
+            <SessionModals
+                qrOpen={open}
                 qr={qr}
-
                 sessionId={id}
-
-                onClose={cerrarQR}
-
+                cerrarQR={cerrarQR}
+                renameOpen={renameOpen}
+                deleteOpen={deleteOpen}
+                nombre={nombre}
+                onCloseRename={() => setRenameOpen(false)}
+                onCloseDelete={() => setDeleteOpen(false)}
             />
-            <SessionRenameModal
-
-    open={renameOpen}
-
-    sessionId={id}
-
-    nombreActual={nombre}
-
-    onClose={() => setRenameOpen(false)}
-
-/>
-
-<DeleteSessionModal
-
-    open={deleteOpen}
-
-    sessionId={id}
-
-    nombre={nombre}
-
-    onClose={() => setDeleteOpen(false)}
-
-/>
 
         </>
 

@@ -151,26 +151,6 @@ export default function SessionMenu({
 
 }
 
-{
-
-    activa && (
-
-        <button
-
-            disabled
-
-            className="active-session"
-
-        >
-
-            ⭐ Sesión activa
-
-        </button>
-
-    )
-
-}
-
 
                         <button
 

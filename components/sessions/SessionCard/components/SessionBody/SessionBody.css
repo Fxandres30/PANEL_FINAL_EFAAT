@@ -1,0 +1,63 @@
+.session-body{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:12px 0;
+
+}
+
+.session-logo{
+
+    width:64px;
+
+    height:64px;
+
+    border-radius:18px;
+
+    background:#25D366;
+
+    color:#fff;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:34px;
+
+    box-shadow:0 10px 25px rgba(37,211,102,.25);
+
+}
+
+.session-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+.session-body h3{
+
+    margin:0;
+
+    font-size:27px;
+
+    font-weight:700;
+
+    color:#1f2937;
+
+    text-align:center;
+
+}

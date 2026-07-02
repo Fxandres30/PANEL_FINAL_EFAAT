@@ -104,6 +104,20 @@
 
 }
 
+.qr-image{
+
+    background:#fff;
+
+    padding:14px;
+
+    border-radius:18px;
+
+    border:1px solid #E5E7EB;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+
+}
+
 .qr-box{
 
     margin:30px auto;
