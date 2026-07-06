@@ -1,36 +1,48 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import "./EventoTable.css";
 
 import EventoCard from "../EventoCard/EventoCard";
 
-import { obtenerEventos } from "@/services/eventos/obtenerEventos";
+import { EventosProps } from "../types";
 
-export default function EventoTable(){
+export default function EventoTable({
 
-    const [eventos,setEventos]=useState([]);
+    eventos
 
-    useEffect(()=>{
+}: EventosProps) {
 
-        cargar();
+    if (eventos.length === 0) {
 
-    },[]);
+        return (
 
-    async function cargar(){
+            <div className="eventoTableEmpty">
 
-        const datos=await obtenerEventos();
+                <h3>
 
-        setEventos(datos);
+                    📭 No hay eventos
+
+                </h3>
+
+                <p>
+
+                    Cuando el bot detecte un evento aparecerá aquí.
+
+                </p>
+
+            </div>
+
+        );
 
     }
 
-    return(
+    return (
 
-        <div className="eventoTable">
+        <section className="eventoTable">
 
             {
 
-                eventos.map(evento=>(
+                eventos.map(evento => (
 
                     <EventoCard
 
@@ -44,7 +56,7 @@ export default function EventoTable(){
 
             }
 
-        </div>
+        </section>
 
     );
 

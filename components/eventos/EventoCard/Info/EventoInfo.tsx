@@ -2,7 +2,13 @@ import "./EventoInfo.css";
 
 import EventoInfoItem from "./EventoInfoItem";
 
-export default function EventoInfo({ evento }) {
+import { EventoProps } from "../../types";
+
+export default function EventoInfo({
+
+    evento
+
+}: EventoProps) {
 
     const items = [
 
@@ -10,6 +16,24 @@ export default function EventoInfo({ evento }) {
             icon: "💰",
             titulo: "Valor",
             valor: evento.valor
+        },
+
+        {
+            icon: "🎲",
+            titulo: "Tabla",
+            valor: evento.tabla
+        },
+
+        {
+            icon: "🔢",
+            titulo: "Cifras",
+            valor: evento.cifras
+        },
+
+        {
+            icon: "🎟",
+            titulo: "Números",
+            valor: evento.cantidad_numeros
         },
 
         {
@@ -28,20 +52,6 @@ export default function EventoInfo({ evento }) {
             icon: "📅",
             titulo: "Fecha",
             valor: evento.fecha_evento
-        },
-
-        {
-            icon: "🎲",
-            titulo: "Tabla",
-            valor: evento.tabla
-        },
-
-        {
-            icon: "🔢",
-            titulo: "Tipo",
-            valor: evento.cifras
-                ? `${evento.cifras} cifras`
-                : "2 cifras"
         }
 
     ];
@@ -52,7 +62,7 @@ export default function EventoInfo({ evento }) {
 
             {
 
-                items.map((item,index)=>(
+                items.map((item, index) => (
 
                     <EventoInfoItem
 

@@ -11,25 +11,27 @@ import EventoTable from "../EventoTable/EventoTable";
 
 import { obtenerEventos } from "@/services/eventos/obtenerEventos";
 
-export default function EventosPage(){
+import { Evento } from "../types";
 
-    const [eventos,setEventos]=useState([]);
+export default function EventosPage() {
 
-    useEffect(()=>{
+    const [eventos, setEventos] = useState<Evento[]>([]);
+
+    useEffect(() => {
 
         cargar();
 
-    },[]);
+    }, []);
 
-    async function cargar(){
+    async function cargar() {
 
-        const datos=await obtenerEventos();
+        const datos = await obtenerEventos();
 
-        setEventos(datos);
+        setEventos(datos ?? []);
 
     }
 
-    return(
+    return (
 
         <div className="eventosPage">
 
@@ -41,7 +43,7 @@ export default function EventosPage(){
                 eventos={eventos}
             />
 
-            <EventoFilters/>
+            <EventoFilters />
 
             <EventoTable
                 eventos={eventos}

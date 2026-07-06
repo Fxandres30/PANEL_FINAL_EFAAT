@@ -1,5 +1,7 @@
 import "./EventoStatItem.css";
 
+import { EventoStatItemProps } from "../../types";
+
 export default function EventoStatItem({
 
     icon,
@@ -8,13 +10,13 @@ export default function EventoStatItem({
 
     valor
 
-}){
+}: EventoStatItemProps) {
 
-    return(
+    return (
 
         <div className="eventoStatItem">
 
-            <span>
+            <span className="icon">
 
                 {icon}
 

@@ -2,7 +2,13 @@ import "./EventoStatsCard.css";
 
 import EventoStatItem from "./EventoStatItem";
 
-export default function EventoStatsCard({ evento }) {
+import { EventoProps } from "../../types";
+
+export default function EventoStatsCard({
+
+    evento
+
+}: EventoProps) {
 
     return (
 
@@ -30,7 +36,7 @@ export default function EventoStatsCard({ evento }) {
                 icon="🟢"
                 titulo="Libres"
                 valor={evento.libres ?? 100}
-            />que archivo te paso para mejorar 
+            />
 
         </section>
 

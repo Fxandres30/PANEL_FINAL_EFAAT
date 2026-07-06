@@ -1,6 +1,15 @@
 import "./EventoHeader.css";
 
-export default function EventoHeader() {
+import { EventosProps } from "../types";
+
+export default function EventoHeader({
+
+    eventos
+
+}: EventosProps) {
+
+    const activos =
+        eventos.filter(e => e.estado === "abierto").length;
 
     return (
 
@@ -24,7 +33,7 @@ export default function EventoHeader() {
 
                     <p>
 
-                        Administra y monitorea todos los eventos detectados por el bot.
+                        {eventos.length} evento(s) registrados • {activos} activo(s)
 
                     </p>
 
@@ -42,7 +51,7 @@ export default function EventoHeader() {
 
                 <button className="newButton">
 
-                    ＋ Nuevo Evento
+                    ➕ Nuevo Evento
 
                 </button>
 

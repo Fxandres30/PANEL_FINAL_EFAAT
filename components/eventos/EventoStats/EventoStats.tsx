@@ -1,25 +1,40 @@
 import "./EventoStats.css";
 
+import { EventosProps } from "../types";
+
 export default function EventoStats({
 
     eventos
 
-}){
+}: EventosProps) {
 
-    const activos=
-        eventos.filter(e=>e.estado==="abierto").length;
+    const activos =
+        eventos.filter(e => e.estado === "abierto").length;
 
-    const finalizados=
-        eventos.filter(e=>e.estado==="cerrado").length;
+    const finalizados =
+        eventos.filter(e => e.estado === "cerrado").length;
 
-    const proximos=
-        eventos.filter(e=>e.estado==="programado").length;
+    const proximos =
+        eventos.filter(e => e.estado === "programado").length;
 
-    return(
+    const reservados =
+        eventos.reduce(
+            (total, evento) =>
+                total + (evento.reservados ?? 0),
+            0
+        );
 
-        <div className="eventoStats">
+    return (
+
+        <section className="eventoStats">
 
             <div className="card">
+
+                <span>
+
+                    🟢 Eventos activos
+
+                </span>
 
                 <h2>
 
@@ -27,15 +42,15 @@ export default function EventoStats({
 
                 </h2>
 
-                <span>
-
-                    Eventos activos
-
-                </span>
-
             </div>
 
             <div className="card">
+
+                <span>
+
+                    ⏳ Próximos
+
+                </span>
 
                 <h2>
 
@@ -43,15 +58,15 @@ export default function EventoStats({
 
                 </h2>
 
-                <span>
-
-                    Próximos
-
-                </span>
-
             </div>
 
             <div className="card">
+
+                <span>
+
+                    ✅ Finalizados
+
+                </span>
 
                 <h2>
 
@@ -59,15 +74,31 @@ export default function EventoStats({
 
                 </h2>
 
+            </div>
+
+            <div className="card">
+
                 <span>
 
-                    Finalizados
+                    🎟 Reservas
 
                 </span>
+
+                <h2>
+
+                    {reservados}
+
+                </h2>
 
             </div>
 
             <div className="card">
+
+                <span>
+
+                    📊 Total eventos
+
+                </span>
 
                 <h2>
 
@@ -75,15 +106,9 @@ export default function EventoStats({
 
                 </h2>
 
-                <span>
-
-                    Total eventos
-
-                </span>
-
             </div>
 
-        </div>
+        </section>
 
     );
 

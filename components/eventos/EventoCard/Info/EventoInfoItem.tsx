@@ -1,5 +1,7 @@
 import "./EventoInfoItem.css";
 
+import { EventoInfoItemProps } from "../../types";
+
 export default function EventoInfoItem({
 
     icon,
@@ -8,11 +10,11 @@ export default function EventoInfoItem({
 
     valor
 
-}){
+}: EventoInfoItemProps) {
 
-    return(
+    return (
 
-        <div className="eventoInfoItem">
+        <article className="eventoInfoItem">
 
             <div className="top">
 
@@ -30,13 +32,13 @@ export default function EventoInfoItem({
 
             </div>
 
-            <div className="valor">
+            <strong className="valor">
 
-                {valor || "-"}
+                {valor ?? "-"}
 
-            </div>
+            </strong>
 
-        </div>
+        </article>
 
     );
 

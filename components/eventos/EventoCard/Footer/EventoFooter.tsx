@@ -1,40 +1,36 @@
-import "./EventoFooter.css";
-
-import EventoActions from "../Actions/EventoActions";
-
-export default function EventoFooter({
+export default function EventoActions({
 
     evento
 
-}){
+}: {
 
-    return(
+    evento: any
 
-        <footer className="eventoFooter">
+}) {
 
-            <div className="footerInfo">
+    return (
 
-                <small>
+        <div className="eventoActions">
 
-                    Detectado
+            <button>
 
-                </small>
+                👁 Ver Evento
 
-                <strong>
+            </button>
 
-                    {evento.creado_en}
+            <button>
 
-                </strong>
+                🎟 Reservas
 
-            </div>
+            </button>
 
-            <EventoActions
+            <button>
 
-                evento={evento}
+                ⚙ Administrar
 
-            />
+            </button>
 
-        </footer>
+        </div>
 
     );
 

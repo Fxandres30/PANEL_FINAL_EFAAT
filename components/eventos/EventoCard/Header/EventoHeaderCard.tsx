@@ -1,10 +1,12 @@
 import "./EventoHeaderCard.css";
 
+import { EventoProps } from "../../types";
+
 export default function EventoHeaderCard({
 
     evento
 
-}){
+}: EventoProps){
 
     return(
 
@@ -18,23 +20,33 @@ export default function EventoHeaderCard({
 
                     <span>
 
-                        {evento.estado.toUpperCase()}
+                        {evento.estado?.toUpperCase()}
 
                     </span>
 
                 </div>
 
-                <h2>
+                <div>
 
-                    🎯 {evento.nombre_evento}
+                    <h2>
 
-                </h2>
+                        🎯 {evento.nombre_evento}
+
+                    </h2>
+
+                    <small>
+
+                        {evento.fecha_evento} • Sorteo {evento.hora_fin}
+
+                    </small>
+
+                </div>
 
             </div>
 
             <div className="headerRight">
 
-                <span>
+                <span className="eventoId">
 
                     #{evento.id?.slice(0,8)}
 
