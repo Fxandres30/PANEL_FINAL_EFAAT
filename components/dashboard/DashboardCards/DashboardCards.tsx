@@ -16,7 +16,7 @@ export default function DashboardCards(){
 
                 <h4>🤖 Bots</h4>
 
-                <h1>0</h1>
+                <h1>hola</h1>
 
             </div>
 
