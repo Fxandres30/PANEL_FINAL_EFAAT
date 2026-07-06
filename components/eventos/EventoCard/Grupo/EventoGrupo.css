@@ -1,0 +1,107 @@
+.eventoGrupo{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+    gap:14px;
+
+    margin:22px 0;
+
+}
+
+.grupoCard{
+
+    background:#f8fafc;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:16px;
+
+    padding:14px;
+
+    transition:.25s;
+
+}
+
+.grupoCard:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 20px rgba(0,0,0,.06);
+
+}
+
+.grupoTop{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-bottom:12px;
+
+}
+
+.grupoIcon{
+
+    font-size:18px;
+
+}
+
+.grupoTop small{
+
+    color:#64748b;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.grupoCard strong{
+
+    display:block;
+
+    font-size:16px;
+
+    color:#0f172a;
+
+    line-height:1.4;
+
+    word-break:break-word;
+
+}
+
+@media(max-width:700px){
+
+.eventoGrupo{
+
+    grid-template-columns:1fr;
+
+    gap:10px;
+
+}
+
+.grupoCard{
+
+    padding:12px;
+
+    border-radius:14px;
+
+}
+
+.grupoCard strong{
+
+    font-size:14px;
+
+}
+
+.grupoTop small{
+
+    font-size:12px;
+
+}
+
+}

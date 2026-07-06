@@ -12,11 +12,11 @@ export default function EventoHeaderCard({
 
         <header className="eventoHeaderCard">
 
-            <div className="headerLeft">
+            <div className="eventoTop">
 
                 <div className={`estado ${evento.estado}`}>
 
-                    <span className="dot"/>
+                    <span className="dot"></span>
 
                     <span>
 
@@ -26,26 +26,6 @@ export default function EventoHeaderCard({
 
                 </div>
 
-                <div>
-
-                    <h2>
-
-                        🎯 {evento.nombre_evento}
-
-                    </h2>
-
-                    <small>
-
-                        {evento.fecha_evento} • Sorteo {evento.hora_fin}
-
-                    </small>
-
-                </div>
-
-            </div>
-
-            <div className="headerRight">
-
                 <span className="eventoId">
 
                     #{evento.id?.slice(0,8)}
@@ -53,6 +33,22 @@ export default function EventoHeaderCard({
                 </span>
 
             </div>
+
+            <h2 className="eventoTitulo">
+
+                🎯 {evento.nombre_evento}
+
+            </h2>
+
+            <small className="eventoFecha">
+
+                📅 {evento.fecha_evento}
+
+                <span>•</span>
+
+                🕒 {evento.hora_fin}
+
+            </small>
 
         </header>
 

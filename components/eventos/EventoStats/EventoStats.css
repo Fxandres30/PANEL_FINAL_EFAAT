@@ -2,34 +2,126 @@
 
     display:grid;
 
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
 
-    gap:20px;
+    gap:18px;
+
+    margin-bottom:30px;
 
 }
 
-.card{
+.statCard{
 
     background:white;
 
     border-radius:18px;
 
-    padding:25px;
+    padding:18px;
 
-    box-shadow:0 5px 20px rgba(0,0,0,.05);
+    border:1px solid #e5e7eb;
+
+    box-shadow:0 8px 25px rgba(15,23,42,.05);
+
+    transition:.25s;
 
 }
 
-.card h2{
+.statCard:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.statIcon{
+
+    font-size:24px;
+
+    margin-bottom:12px;
+
+}
+
+.statCard h2{
 
     margin:0;
 
     font-size:34px;
 
+    color:#111827;
+
 }
 
-.card span{
+.statCard span{
 
     color:#64748b;
+
+    font-size:14px;
+
+}
+
+@media(max-width:900px){
+
+.eventoStats{
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:14px;
+
+}
+
+.statCard{
+
+    padding:16px;
+
+}
+
+.statIcon{
+
+    font-size:20px;
+
+}
+
+.statCard h2{
+
+    font-size:28px;
+
+}
+
+.statCard span{
+
+    font-size:13px;
+
+}
+
+}
+
+@media(max-width:500px){
+
+.eventoStats{
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:12px;
+
+}
+
+.statCard{
+
+    padding:14px;
+
+    border-radius:14px;
+
+}
+
+.statCard h2{
+
+    font-size:24px;
+
+}
+
+.statCard span{
+
+    font-size:12px;
+
+}
 
 }

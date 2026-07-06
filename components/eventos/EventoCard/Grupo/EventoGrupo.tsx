@@ -8,97 +8,80 @@ export default function EventoGrupo({
 
 }: EventoProps){
 
+    const items=[
+
+        {
+            icon:"👥",
+            titulo:"Grupo",
+            valor:evento.grupo_nombre || "Sin nombre"
+        },
+
+        {
+            icon:"🆔",
+            titulo:"ID",
+            valor:evento.grupo_id
+        },
+
+        {
+            icon:"🤖",
+            titulo:"Bot",
+            valor:evento.telefono_bot || "-"
+        },
+
+        {
+            icon:"📱",
+            titulo:"Sesión",
+            valor:evento.session_id?.slice(0,8) || "-"
+        },
+
+        {
+            icon:"🚪",
+            titulo:"Estado",
+            valor:evento.abierto ? "Abierto" : "Cerrado"
+        }
+
+    ];
+
     return(
 
         <section className="eventoGrupo">
 
-            <div className="grupoCard">
+            {
 
-                <span>
+                items.map((item,index)=>(
 
-                    👥 Grupo
+                    <article
+                        key={index}
+                        className="grupoCard"
+                    >
 
-                </span>
+                        <div className="grupoTop">
 
-                <strong>
+                            <span className="grupoIcon">
 
-                    {evento.grupo_nombre || "Sin nombre"}
+                                {item.icon}
 
-                </strong>
+                            </span>
 
-            </div>
+                            <small>
 
-            <div className="grupoCard">
+                                {item.titulo}
 
-                <span>
+                            </small>
 
-                    🆔 ID
+                        </div>
 
-                </span>
+                        <strong>
 
-                <small>
+                            {item.valor}
 
-                    {evento.grupo_id}
+                        </strong>
 
-                </small>
+                    </article>
 
-            </div>
+                ))
 
-            <div className="grupoCard">
-
-                <span>
-
-                    🤖 Bot
-
-                </span>
-
-                <strong>
-
-                    {evento.telefono_bot || "-"}
-
-                </strong>
-
-            </div>
-
-            <div className="grupoCard">
-
-                <span>
-
-                    📱 Sesión
-
-                </span>
-
-                <strong>
-
-                    {evento.session_id?.slice(0,8) || "-"}
-
-                </strong>
-
-            </div>
-
-            <div className="grupoCard">
-
-                <span>
-
-                    🚪 Grupo
-
-                </span>
-
-                <strong>
-
-                    {
-
-                        evento.abierto
-
-                            ? "Abierto"
-
-                            : "Cerrado"
-
-                    }
-
-                </strong>
-
-            </div>
+            }
 
         </section>
 

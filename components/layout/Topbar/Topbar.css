@@ -1,8 +1,8 @@
 .topbar{
 
-    height:80px;
+    height:78px;
 
-    background:white;
+    background:#fff;
 
     display:flex;
 
@@ -10,27 +10,113 @@
 
     align-items:center;
 
-    padding:0 30px;
+    padding:0 28px;
 
-    border-bottom:1px solid #eee;
+    border-bottom:1px solid #e5e7eb;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:100;
 
 }
 
-.topbar h2{
+.topbarLeft{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+.menuButton{
+
+    width:46px;
+
+    height:46px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#f1f5f9;
+
+    cursor:pointer;
+
+    font-size:22px;
+
+    transition:.25s;
+
+}
+
+.menuButton:hover{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+.welcome h2{
 
     margin:0;
 
-}
+    font-size:24px;
 
-.topbar p{
-
-    margin-top:4px;
-
-    color:#777;
+    color:#111827;
 
 }
 
-.topbar-user{
+.welcome span{
+
+    color:#64748b;
+
+    font-size:14px;
+
+}
+
+.topbarRight{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+.iconButton{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#f8fafc;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    transition:.25s;
+
+}
+
+.iconButton:hover{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+.topbarUser{
 
     display:flex;
 
@@ -42,13 +128,13 @@
 
 .avatar{
 
-    width:45px;
+    width:46px;
 
-    height:45px;
+    height:46px;
 
     border-radius:50%;
 
-    background:#2563eb;
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
 
     color:white;
 
@@ -58,6 +144,80 @@
 
     align-items:center;
 
-    font-weight:bold;
+    font-weight:700;
+
+}
+
+.userInfo{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.userInfo strong{
+
+    font-size:15px;
+
+}
+
+.userInfo small{
+
+    color:#64748b;
+
+    font-size:12px;
+
+}
+
+@media(max-width:700px){
+
+.topbar{
+
+    padding:12px 16px;
+
+    height:auto;
+
+}
+
+.welcome h2{
+
+    font-size:20px;
+
+}
+
+.welcome span{
+
+    font-size:12px;
+
+}
+
+.userInfo{
+
+    display:none;
+
+}
+
+.iconButton{
+
+    display:none;
+
+}
+
+.menuButton{
+
+    width:42px;
+
+    height:42px;
+
+}
+
+.avatar{
+
+    width:42px;
+
+    height:42px;
+
+}
 
 }

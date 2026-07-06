@@ -2,31 +2,95 @@
 
 import "./Topbar.css";
 
-export default function Topbar() {
-  return (
-    <header className="topbar">
+interface TopbarProps{
 
-      <div>
-        <h2>Bienvenido 👋</h2>
-        <p>Panel de administración</p>
-      </div>
+    onToggleSidebar:()=>void;
 
-      <div className="topbar-user">
+}
 
-        <div className="avatar">
-          A
-        </div>
+export default function Topbar({
 
-        <div>
+    onToggleSidebar
 
-          <strong>Andrés</strong>
+}:TopbarProps){
 
-          <p>Administrador</p>
+    return(
 
-        </div>
+        <header className="topbar">
 
-      </div>
+            <div className="topbarLeft">
 
-    </header>
-  );
+                <button
+                    className="menuButton"
+                    onClick={onToggleSidebar}
+                >
+
+                    ☰
+
+                </button>
+
+                <div className="welcome">
+
+                    <h2>
+
+                        Bienvenido, Andrés 👋
+
+                    </h2>
+
+                    <span>
+
+                        Panel de administración
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div className="topbarRight">
+
+                <button className="iconButton">
+
+                    🔔
+
+                </button>
+
+                <button className="iconButton">
+
+                    ⚙️
+
+                </button>
+
+                <div className="topbarUser">
+
+                    <div className="avatar">
+
+                        A
+
+                    </div>
+
+                    <div className="userInfo">
+
+                        <strong>
+
+                            Andrés
+
+                        </strong>
+
+                        <small>
+
+                            Administrador
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+    );
+
 }

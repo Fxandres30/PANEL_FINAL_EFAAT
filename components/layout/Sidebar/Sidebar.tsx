@@ -5,93 +5,129 @@ import { usePathname } from "next/navigation";
 
 import "./Sidebar.css";
 
-export default function Sidebar() {
+interface SidebarProps{
 
-    const pathname = usePathname();
+    open:boolean;
 
-    const menu = [
+    onClose:()=>void;
+
+}
+
+export default function Sidebar({
+
+    open,
+
+    onClose
+
+}:SidebarProps){
+
+    const pathname=usePathname();
+
+    const menu=[
 
         {
-            titulo: "Principal",
-            items: [
+            titulo:"Principal",
+            items:[
                 {
-                    href: "/dashboard",
-                    icon: "🏠",
-                    label: "Dashboard"
+                    href:"/dashboard",
+                    icon:"🏠",
+                    label:"Dashboard"
                 }
             ]
         },
 
         {
-            titulo: "Bot",
-            items: [
+            titulo:"Bot",
+            items:[
                 {
-                    href: "/sesiones",
-                    icon: "📱",
-                    label: "Sesiones"
+                    href:"/sesiones",
+                    icon:"📱",
+                    label:"Sesiones"
                 },
                 {
-                    href: "/eventos",
-                    icon: "🎯",
-                    label: "Eventos"
+                    href:"/eventos",
+                    icon:"🎯",
+                    label:"Eventos"
                 },
                 {
-                    href: "/reservas",
-                    icon: "🎟️",
-                    label: "Reservas"
+                    href:"/reservas",
+                    icon:"🎟️",
+                    label:"Reservas"
                 }
             ]
         },
 
         {
-            titulo: "Clientes",
-            items: [
+            titulo:"Clientes",
+            items:[
                 {
-                    href: "/chats",
-                    icon: "💬",
-                    label: "Chats"
+                    href:"/chats",
+                    icon:"💬",
+                    label:"Chats"
                 },
                 {
-                    href: "/clientes",
-                    icon: "👥",
-                    label: "Clientes"
+                    href:"/clientes",
+                    icon:"👥",
+                    label:"Clientes"
                 }
             ]
         },
 
         {
-            titulo: "Sistema",
-            items: [
+            titulo:"Sistema",
+            items:[
                 {
-                    href: "/reportes",
-                    icon: "📊",
-                    label: "Reportes"
+                    href:"/reportes",
+                    icon:"📊",
+                    label:"Reportes"
                 },
                 {
-                    href: "/configuracion",
-                    icon: "⚙️",
-                    label: "Configuración"
+                    href:"/configuracion",
+                    icon:"⚙️",
+                    label:"Configuración"
                 }
             ]
         }
 
     ];
 
-    return (
+    return(
 
-        <aside className="sidebar">
+        <aside
+
+            className={
+
+                open
+
+                    ? "sidebar open"
+
+                    : "sidebar"
+
+            }
+
+        >
 
             <div className="sidebarHeader">
 
                 <div className="logoCircle">
+
                     E
+
                 </div>
 
                 <div>
 
-                    <h2>EFAAT</h2>
+                    <h2>
 
-                    <span>Bot Manager</span>
+                        EFAAT
+
+                    </h2>
+
+                    <span>
+
+                        Bot Manager
+
+                    </span>
 
                 </div>
 
@@ -99,11 +135,14 @@ export default function Sidebar() {
 
             {
 
-                menu.map((grupo) => (
+                menu.map(grupo=>(
 
                     <div
+
                         key={grupo.titulo}
+
                         className="menuGroup"
+
                     >
 
                         <p className="menuTitle">
@@ -114,7 +153,7 @@ export default function Sidebar() {
 
                         {
 
-                            grupo.items.map((item) => (
+                            grupo.items.map(item=>(
 
                                 <Link
 
@@ -122,10 +161,16 @@ export default function Sidebar() {
 
                                     href={item.href}
 
+                                    onClick={onClose}
+
                                     className={
-                                        pathname === item.href
-                                            ? "menuItem active"
-                                            : "menuItem"
+
+                                        pathname===item.href
+
+                                        ? "menuItem active"
+
+                                        : "menuItem"
+
                                     }
 
                                 >
@@ -136,7 +181,11 @@ export default function Sidebar() {
 
                                     </span>
 
-                                    {item.label}
+                                    <span>
+
+                                        {item.label}
+
+                                    </span>
 
                                 </Link>
 
@@ -152,7 +201,7 @@ export default function Sidebar() {
 
             <div className="sidebarFooter">
 
-                <div className="statusDot"></div>
+                <div className="statusDot"/>
 
                 <div>
 

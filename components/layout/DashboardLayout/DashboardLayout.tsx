@@ -1,38 +1,84 @@
 "use client";
 
+import { useState } from "react";
+
 import "./DashboardLayout.css";
 
 import Sidebar from "../Sidebar/Sidebar";
 import Topbar from "../Topbar/Topbar";
 
-interface Props {
-  children: React.ReactNode;
+interface Props{
+
+    children:React.ReactNode;
+
 }
 
 export default function DashboardLayout({
-  children,
-}: Props) {
 
-  return (
+    children
 
-    <div className="layout">
+}:Props){
 
-      <Sidebar />
+    const [sidebarOpen,setSidebarOpen]=useState(false);
 
-      <div className="content">
+    function toggleSidebar(){
 
-        <Topbar />
+        setSidebarOpen(!sidebarOpen);
 
-        <main>
+    }
 
-          {children}
+    function closeSidebar(){
 
-        </main>
+        setSidebarOpen(false);
 
-      </div>
+    }
 
-    </div>
+    return(
 
-  );
+        <div className="layout">
+
+            <Sidebar
+
+                open={sidebarOpen}
+
+                onClose={closeSidebar}
+
+            />
+
+            {
+
+                sidebarOpen && (
+
+                    <div
+
+                        className="overlay"
+
+                        onClick={closeSidebar}
+
+                    />
+
+                )
+
+            }
+
+            <div className="content">
+
+                <Topbar
+
+                    onToggleSidebar={toggleSidebar}
+
+                />
+
+                <main>
+
+                    {children}
+
+                </main>
+
+            </div>
+
+        </div>
+
+    );
 
 }

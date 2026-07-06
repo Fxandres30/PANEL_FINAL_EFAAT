@@ -10,33 +10,53 @@ export default function EventoStatsCard({
 
 }: EventoProps) {
 
+    const stats = [
+
+        {
+            icon: "🎟",
+            titulo: "Reservados",
+            valor: evento.reservados ?? 0
+        },
+
+        {
+            icon: "✅",
+            titulo: "Pagados",
+            valor: evento.pagados ?? 0
+        },
+
+        {
+            icon: "⏳",
+            titulo: "Pendientes",
+            valor: evento.pendientes ?? 0
+        },
+
+        {
+            icon: "🟢",
+            titulo: "Libres",
+            valor: evento.libres ?? 100
+        }
+
+    ];
+
     return (
 
         <section className="eventoStatsCard">
 
-            <EventoStatItem
-                icon="🎟"
-                titulo="Reservados"
-                valor={evento.reservados ?? 0}
-            />
+            {
 
-            <EventoStatItem
-                icon="✅"
-                titulo="Pagados"
-                valor={evento.pagados ?? 0}
-            />
+                stats.map((stat, index) => (
 
-            <EventoStatItem
-                icon="⏳"
-                titulo="Pendientes"
-                valor={evento.pendientes ?? 0}
-            />
+                    <EventoStatItem
 
-            <EventoStatItem
-                icon="🟢"
-                titulo="Libres"
-                valor={evento.libres ?? 100}
-            />
+                        key={index}
+
+                        {...stat}
+
+                    />
+
+                ))
+
+            }
 
         </section>
 

@@ -6,12 +6,12 @@ export default function EventoHeader({
 
     eventos
 
-}: EventosProps) {
+}:EventosProps){
 
-    const activos =
-        eventos.filter(e => e.estado === "abierto").length;
+    const activos=
+        eventos.filter(e=>e.estado==="abierto").length;
 
-    return (
+    return(
 
         <header className="eventoHeader">
 
@@ -23,7 +23,7 @@ export default function EventoHeader({
 
                 </div>
 
-                <div>
+                <div className="headerInfo">
 
                     <h1>
 
@@ -31,11 +31,15 @@ export default function EventoHeader({
 
                     </h1>
 
-                    <p>
+                    <span>
 
-                        {eventos.length} evento(s) registrados • {activos} activo(s)
+                        {eventos.length} registrado(s)
 
-                    </p>
+                        •
+
+                        {activos} activo(s)
+
+                    </span>
 
                 </div>
 
@@ -45,13 +49,25 @@ export default function EventoHeader({
 
                 <button className="refreshButton">
 
-                    🔄 Actualizar
+                    🔄
+
+                    <span>
+
+                        Actualizar
+
+                    </span>
 
                 </button>
 
                 <button className="newButton">
 
-                    ➕ Nuevo Evento
+                    ➕
+
+                    <span>
+
+                        Nuevo Evento
+
+                    </span>
 
                 </button>
 

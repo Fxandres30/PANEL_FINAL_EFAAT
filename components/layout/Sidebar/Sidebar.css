@@ -4,33 +4,37 @@
 
     height:100vh;
 
-    position:sticky;
-
-    top:0;
-
-    flex-shrink:0;
-
-    display:flex;
-    flex-direction:column;
-
-    padding:24px;
-
     background:#111827;
 
     color:white;
 
-    border-right:1px solid rgba(255,255,255,.05);
+    display:flex;
+
+    flex-direction:column;
+
+    padding:22px;
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    z-index:1000;
 
     overflow-y:auto;
 
-    z-index:100;
+    transition:left .35s ease;
 
 }
+/* Header */
 
 .sidebarHeader{
 
     display:flex;
+
     align-items:center;
+
     gap:15px;
 
     margin-bottom:35px;
@@ -39,21 +43,25 @@
 
 .logoCircle{
 
-    width:55px;
-    height:55px;
+    width:56px;
+
+    height:56px;
 
     border-radius:50%;
 
-    background:linear-gradient(135deg,#2563eb,#3b82f6);
-
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
+
     font-size:22px;
+
     font-weight:bold;
 
-    box-shadow:0 10px 25px rgba(59,130,246,.35);
+    box-shadow:0 10px 25px rgba(37,99,235,.35);
 
 }
 
@@ -61,7 +69,7 @@
 
     margin:0;
 
-    font-size:25px;
+    font-size:32px;
 
 }
 
@@ -73,9 +81,11 @@
 
 }
 
+/* Menu */
+
 .menuGroup{
 
-    margin-bottom:30px;
+    margin-bottom:28px;
 
 }
 
@@ -83,13 +93,13 @@
 
     color:#64748b;
 
-    text-transform:uppercase;
-
     font-size:11px;
 
-    margin-bottom:12px;
+    text-transform:uppercase;
 
     letter-spacing:2px;
+
+    margin-bottom:10px;
 
 }
 
@@ -103,11 +113,11 @@
 
     padding:14px 16px;
 
+    border-radius:12px;
+
     color:#cbd5e1;
 
     text-decoration:none;
-
-    border-radius:12px;
 
     transition:.25s;
 
@@ -123,7 +133,7 @@
 
     color:white;
 
-    transform:translateX(4px);
+    transform:translateX(5px);
 
 }
 
@@ -133,7 +143,7 @@
 
     color:white;
 
-    box-shadow:0 12px 30px rgba(37,99,235,.30);
+    box-shadow:0 10px 25px rgba(37,99,235,.30);
 
 }
 
@@ -143,19 +153,21 @@
 
     position:absolute;
 
-    left:-10px;
+    left:-12px;
+
+    width:4px;
 
     top:8px;
 
     bottom:8px;
 
-    width:4px;
-
-    border-radius:10px;
+    border-radius:20px;
 
     background:#60a5fa;
 
 }
+
+/* Footer */
 
 .sidebarFooter{
 
@@ -163,13 +175,27 @@
 
     display:flex;
 
-    align-items:center;
-
     gap:12px;
+
+    align-items:center;
 
     padding-top:20px;
 
     border-top:1px solid rgba(255,255,255,.08);
+
+}
+
+.statusDot{
+
+    width:12px;
+
+    height:12px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+
+    box-shadow:0 0 10px #22c55e;
 
 }
 
@@ -189,15 +215,45 @@
 
 }
 
-.statusDot{
+/* ===========================
+   TABLET
+=========================== */
 
-    width:12px;
-    height:12px;
+@media(max-width:1100px){
 
-    border-radius:50%;
+.sidebar{
 
-    background:#22c55e;
+    width:230px;
 
-    box-shadow:0 0 10px #22c55e;
+}
+
+.sidebarHeader h2{
+
+    font-size:26px;
+
+}
+
+}
+
+/* ===========================
+   CELULAR
+=========================== */
+@media(max-width:900px){
+
+.sidebar{
+
+    left:-100%;
+
+    width:290px;
+
+    box-shadow:18px 0 40px rgba(0,0,0,.35);
+
+}
+
+.sidebar.open{
+
+    left:0;
+
+}
 
 }
