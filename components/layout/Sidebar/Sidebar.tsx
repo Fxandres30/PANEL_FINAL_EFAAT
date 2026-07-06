@@ -1,39 +1,179 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 import "./Sidebar.css";
 
 export default function Sidebar() {
-  return (
-    <aside className="sidebar">
 
-      <h2 className="logo">
-        EFAAT
-      </h2>
+    const pathname = usePathname();
 
-      <nav>
+    const menu = [
 
-        <a href="/dashboard">
-          🏠 Dashboard
-        </a>
+        {
+            titulo: "Principal",
+            items: [
+                {
+                    href: "/dashboard",
+                    icon: "🏠",
+                    label: "Dashboard"
+                }
+            ]
+        },
 
-        <a href="/sesiones">
-          📱 Sesiones
-        </a>
+        {
+            titulo: "Bot",
+            items: [
+                {
+                    href: "/sesiones",
+                    icon: "📱",
+                    label: "Sesiones"
+                },
+                {
+                    href: "/eventos",
+                    icon: "🎯",
+                    label: "Eventos"
+                },
+                {
+                    href: "/reservas",
+                    icon: "🎟️",
+                    label: "Reservas"
+                }
+            ]
+        },
 
-        <a href="/chats">
-          💬 Chats
-        </a>
+        {
+            titulo: "Clientes",
+            items: [
+                {
+                    href: "/chats",
+                    icon: "💬",
+                    label: "Chats"
+                },
+                {
+                    href: "/clientes",
+                    icon: "👥",
+                    label: "Clientes"
+                }
+            ]
+        },
 
-        <a href="/clientes">
-          👥 Clientes
-        </a>
+        {
+            titulo: "Sistema",
+            items: [
+                {
+                    href: "/reportes",
+                    icon: "📊",
+                    label: "Reportes"
+                },
+                {
+                    href: "/configuracion",
+                    icon: "⚙️",
+                    label: "Configuración"
+                }
+            ]
+        }
 
-        <a href="/configuracion">
-          ⚙ Configuración
-        </a>
+    ];
 
-      </nav>
+    return (
 
-    </aside>
-  );
+        <aside className="sidebar">
+
+            <div className="sidebarHeader">
+
+                <div className="logoCircle">
+                    E
+                </div>
+
+                <div>
+
+                    <h2>EFAAT</h2>
+
+                    <span>Bot Manager</span>
+
+                </div>
+
+            </div>
+
+            {
+
+                menu.map((grupo) => (
+
+                    <div
+                        key={grupo.titulo}
+                        className="menuGroup"
+                    >
+
+                        <p className="menuTitle">
+
+                            {grupo.titulo}
+
+                        </p>
+
+                        {
+
+                            grupo.items.map((item) => (
+
+                                <Link
+
+                                    key={item.href}
+
+                                    href={item.href}
+
+                                    className={
+                                        pathname === item.href
+                                            ? "menuItem active"
+                                            : "menuItem"
+                                    }
+
+                                >
+
+                                    <span>
+
+                                        {item.icon}
+
+                                    </span>
+
+                                    {item.label}
+
+                                </Link>
+
+                            ))
+
+                        }
+
+                    </div>
+
+                ))
+
+            }
+
+            <div className="sidebarFooter">
+
+                <div className="statusDot"></div>
+
+                <div>
+
+                    <strong>
+
+                        Sistema Online
+
+                    </strong>
+
+                    <span>
+
+                        Todo funcionando
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+    );
+
 }

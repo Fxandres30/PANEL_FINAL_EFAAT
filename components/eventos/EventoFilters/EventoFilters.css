@@ -1,0 +1,21 @@
+.eventoFilters{
+
+    display:flex;
+
+    gap:20px;
+
+}
+
+.eventoFilters input{
+
+    flex:1;
+
+    padding:14px;
+
+}
+
+.eventoFilters select{
+
+    width:220px;
+
+}

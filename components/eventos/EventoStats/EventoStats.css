@@ -1,0 +1,35 @@
+.eventoStats{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:20px;
+
+}
+
+.card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.05);
+
+}
+
+.card h2{
+
+    margin:0;
+
+    font-size:34px;
+
+}
+
+.card span{
+
+    color:#64748b;
+
+}
