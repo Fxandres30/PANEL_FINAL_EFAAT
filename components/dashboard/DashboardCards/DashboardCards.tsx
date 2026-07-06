@@ -1,50 +1,124 @@
+"use client";
+
 import "./DashboardCards.css";
 
-export default function DashboardCards(){
+import {
 
-    return(
+    DashboardCardsProps
+
+} from "../types";
+
+export default function DashboardCards({
+
+    resumen
+
+}: DashboardCardsProps) {
+
+    const cards = [
+
+        {
+            icon: "🤖",
+            titulo: "Bots Online",
+            valor: resumen.bots,
+            color: "green"
+        },
+
+        {
+            icon: "📱",
+            titulo: "Sesiones",
+            valor: resumen.sesiones,
+            color: "blue"
+        },
+
+        {
+            icon: "🎯",
+            titulo: "Eventos",
+            valor: resumen.eventos,
+            color: "orange"
+        },
+
+        {
+            icon: "🎟",
+            titulo: "Reservas",
+            valor: resumen.reservas,
+            color: "purple"
+        },
+
+        {
+            icon: "👥",
+            titulo: "Clientes",
+            valor: resumen.clientes,
+            color: "cyan"
+        },
+
+        {
+            icon: "💬",
+            titulo: "Chats",
+            valor: resumen.chats,
+            color: "pink"
+        },
+
+        {
+            icon: "📦",
+            titulo: "Grupos",
+            valor: resumen.grupos,
+            color: "yellow"
+        },
+
+        {
+            icon: "💰",
+            titulo: "Ventas",
+            valor: resumen.ventas,
+            color: "success"
+        }
+
+    ];
+
+    return (
 
         <>
+            <h2 className="dashboard-title">
 
-        <h2 className="dashboard-title">
-            Resumen General
-        </h2>
+                Resumen General
 
-        <div className="cards">
+            </h2>
 
-            <div className="card">
+            <div className="cards">
 
-                <h4>🤖 Bots</h4>
+                {
 
-                <h1>hola</h1>
+                    cards.map((card,index)=>(
+
+                        <div
+                            key={index}
+                            className={`card ${card.color}`}
+                        >
+
+                            <span className="icon">
+
+                                {card.icon}
+
+                            </span>
+
+                            <h3>
+
+                                {card.valor}
+
+                            </h3>
+
+                            <small>
+
+                                {card.titulo}
+
+                            </small>
+
+                        </div>
+
+                    ))
+
+                }
 
             </div>
-
-            <div className="card">
-
-                <h4>💬 Chats</h4>
-
-                <h1>0</h1>
-
-            </div>
-
-            <div className="card">
-
-                <h4>👥 Clientes</h4>
-
-                <h1>0</h1>
-
-            </div>
-
-            <div className="card">
-
-                <h4>📦 Sesiones</h4>
-
-                <h1>0</h1>
-
-            </div>
-
-        </div>
 
         </>
 
