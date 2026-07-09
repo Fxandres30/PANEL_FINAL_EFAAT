@@ -15,12 +15,26 @@ export default function LoginForm() {
 
   const [password, setPassword] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   async function iniciarSesion() {
+
+    if (!email || !password) {
+
+      alert("Completa todos los campos.");
+
+      return;
+
+    }
+
+    setLoading(true);
 
     const { error } = await login(
       email,
       password
     );
+
+    setLoading(false);
 
     if (error) {
 
@@ -30,7 +44,7 @@ export default function LoginForm() {
 
     }
 
-    router.push("/dashboard");
+    router.replace("/dashboard");
 
   }
 
@@ -38,7 +52,16 @@ export default function LoginForm() {
 
     <div className="login-container">
 
-      <div className="login-card">
+      <form
+        className="login-card"
+        onSubmit={(e) => {
+
+          e.preventDefault();
+
+          iniciarSesion();
+
+        }}
+      >
 
         <h1 className="login-title">
           EFAAT BOTS
@@ -70,12 +93,13 @@ export default function LoginForm() {
 
         <button
           className="login-button"
-          onClick={iniciarSesion}
+          type="submit"
+          disabled={loading}
         >
-          Iniciar sesión
+          {loading ? "Ingresando..." : "Iniciar sesión"}
         </button>
 
-      </div>
+      </form>
 
     </div>
 

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import DashboardLayout from "@/components/layout/DashboardLayout/DashboardLayout";
-
+import { cambiarClave } from "@/services/auth/cambiarClave";
 import DashboardCards from "@/components/dashboard/DashboardCards/DashboardCards";
 
 export default function DashboardPage() {
@@ -33,6 +33,18 @@ export default function DashboardPage() {
         cargarResumen();
 
     }, []);
+
+    async function actualizar() {
+
+  const { error } = await cambiarClave("1003294080");
+
+  if (error) {
+    alert(error.message);
+  } else {
+    alert("Contraseña cambiada");
+  }
+
+}
 
     async function cargarResumen() {
 
@@ -69,6 +81,10 @@ export default function DashboardPage() {
                 resumen={resumen}
 
             />
+
+            <button onClick={actualizar}>
+  Cambiar contraseña
+</button>
 
         </DashboardLayout>
 
