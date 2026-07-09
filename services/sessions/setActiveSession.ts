@@ -1,23 +1,18 @@
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+
 export async function setActiveSession(sessionId: string) {
+  const res = await fetch(`${API_URL}/sessions/active`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ sessionId }),
+  });
 
-    const res = await fetch("http://localhost:4000/sessions/active", {
+  if (!res.ok) {
+    throw new Error(await res.text());
+  }
 
-        method: "POST",
-
-        headers: {
-
-            "Content-Type": "application/json"
-
-        },
-
-        body: JSON.stringify({
-
-            sessionId
-
-        })
-
-    });
-
-    return await res.json();
-
+  return await res.json();
 }
