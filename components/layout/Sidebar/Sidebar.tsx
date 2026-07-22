@@ -61,7 +61,7 @@ export default function Sidebar({
             titulo:"Clientes",
             items:[
                 {
-                    href:"/chats",
+                    href:"https://panel-api-v1.vercel.app/admin/chats",
                     icon:"💬",
                     label:"Chats"
                 },
