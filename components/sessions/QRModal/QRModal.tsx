@@ -2,12 +2,11 @@
 
 import "./QRModal.css";
 
-import { useEffect, useState } from "react";
-
 type Props = {
     open: boolean;
     qr: string;
     sessionId: string;
+    segundos: number;
     onClose: () => void;
 };
 
@@ -16,40 +15,10 @@ export default function QRModal({
     open,
     qr,
     sessionId,
+    segundos,
     onClose
 
 }: Props) {
-
-    const [segundos, setSegundos] = useState(120);
-
-    useEffect(() => {
-
-        if (!open)
-            return;
-
-        setSegundos(120);
-
-        const interval = setInterval(() => {
-
-            setSegundos((valor) => {
-
-                if (valor <= 1) {
-
-                    clearInterval(interval);
-
-                    return 0;
-
-                }
-
-                return valor - 1;
-
-            });
-
-        }, 1000);
-
-        return () => clearInterval(interval);
-
-    }, [open]);
 
     if (!open)
         return null;
@@ -62,12 +31,6 @@ export default function QRModal({
         await navigator.clipboard.writeText(enlace);
 
         alert("✅ Enlace copiado correctamente.");
-
-    }
-
-    function cerrar() {
-
-        onClose();
 
     }
 
@@ -169,7 +132,7 @@ export default function QRModal({
 
                         className="close"
 
-                        onClick={cerrar}
+                        onClick={onClose}
 
                     >
 

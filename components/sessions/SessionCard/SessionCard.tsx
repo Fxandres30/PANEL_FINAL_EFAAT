@@ -50,21 +50,23 @@ export default function SessionCard({
 
     const {
 
-        loading,
+    loading,
 
-        open,
+    open,
 
-        qr,
+    qr,
 
-        estadoActual,
+    segundos,
 
-        accionPrincipal,
+    estadoActual,
 
-        textoBoton,
+    accionPrincipal,
 
-        cerrarQR
+    textoBoton,
 
-    } = useSession(id, estado);
+    cerrarQR
+
+} = useSession(id, estado);
 
     const conectado =
         estadoActual === "conectado";
@@ -160,16 +162,17 @@ export default function SessionCard({
             </div>
 
             <SessionModals
-                qrOpen={open}
-                qr={qr}
-                sessionId={id}
-                cerrarQR={cerrarQR}
-                renameOpen={renameOpen}
-                deleteOpen={deleteOpen}
-                nombre={nombre}
-                onCloseRename={() => setRenameOpen(false)}
-                onCloseDelete={() => setDeleteOpen(false)}
-            />
+    qrOpen={open}
+    qr={qr}
+    sessionId={id}
+    segundos={segundos}
+    cerrarQR={cerrarQR}
+    renameOpen={renameOpen}
+    deleteOpen={deleteOpen}
+    nombre={nombre}
+    onCloseRename={() => setRenameOpen(false)}
+    onCloseDelete={() => setDeleteOpen(false)}
+/>
 
         </>
 

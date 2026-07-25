@@ -1,16 +1,4 @@
-body{
-
-    margin:0;
-
-    font-family:Arial,Helvetica,sans-serif;
-
-    background:#eef3ff;
-
-}
-
 .page{
-
-    width:100%;
 
     min-height:100vh;
 
@@ -19,6 +7,8 @@ body{
     justify-content:center;
 
     align-items:center;
+
+    background:#eef3ff;
 
     padding:30px;
 
@@ -30,31 +20,33 @@ body{
 
     background:#fff;
 
-    border-radius:20px;
+    border-radius:22px;
 
     padding:35px;
 
     text-align:center;
 
-    box-shadow:0 20px 50px rgba(0,0,0,.12);
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
 
 }
 
 .card h1{
 
+    font-size:28px;
+
     color:#2563eb;
 
-    margin-bottom:5px;
+    margin-bottom:10px;
 
 }
 
 .card h2{
 
-    margin-top:0;
+    font-size:34px;
 
-    color:#444;
+    margin-bottom:20px;
 
-    font-size:22px;
+    color:#222;
 
 }
 
@@ -66,11 +58,11 @@ body{
 
     align-items:center;
 
-    gap:8px;
-
-    margin:20px 0;
+    gap:10px;
 
     color:#555;
+
+    font-size:18px;
 
 }
 
@@ -90,67 +82,65 @@ body{
 
 @keyframes pulse{
 
-    0%{
+    0%{opacity:.4;}
 
-        transform:scale(1);
+    50%{opacity:1;}
 
-        opacity:1;
+    100%{opacity:.4;}
 
-    }
+}
 
-    50%{
+.contador{
 
-        transform:scale(1.4);
+    margin:18px 0;
 
-        opacity:.4;
+    font-size:18px;
 
-    }
+    color:#444;
 
-    100%{
+}
 
-        transform:scale(1);
+.contador b{
 
-        opacity:1;
+    color:#2563eb;
 
-    }
+    font-size:22px;
 
 }
 
 .qr{
 
-    width:320px;
+    width:290px;
 
-    max-width:100%;
+    border:1px solid #ddd;
 
     border-radius:12px;
 
-    background:white;
-
     padding:12px;
 
-    border:1px solid #ddd;
+    margin:10px auto 25px;
+
+    display:block;
 
 }
 
 .loading{
 
-    margin:50px 0;
-
-    font-size:18px;
+    margin:60px 0;
 
     color:#666;
+
+    font-size:18px;
 
 }
 
 .info{
 
-    margin-top:30px;
-
     text-align:left;
 
-    color:#555;
+    line-height:2;
 
-    line-height:28px;
+    color:#444;
 
 }
 
@@ -166,8 +156,6 @@ small{
 
 .success{
 
-    width:100%;
-
     min-height:100vh;
 
     display:flex;
@@ -176,28 +164,28 @@ small{
 
     align-items:center;
 
-    background:#eef8f1;
+    background:#eef3ff;
 
 }
 
 .success-card{
 
-    width:420px;
+    background:#fff;
 
-    background:white;
+    padding:50px;
 
     border-radius:20px;
 
-    padding:40px;
-
     text-align:center;
 
-    box-shadow:0 20px 50px rgba(0,0,0,.12);
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
 
 }
 
 .check{
 
     font-size:70px;
+
+    margin-bottom:20px;
 
 }

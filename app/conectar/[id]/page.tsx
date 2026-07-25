@@ -15,21 +15,69 @@ export default function Conectar({
 
   const [qr, setQr] = useState<string | null>(null);
   const [estado, setEstado] = useState("");
+  const [segundos, setSegundos] = useState(120);
+
+  function calcularTiempo(expira: string | null) {
+
+    if (!expira) {
+
+      setSegundos(0);
+
+      return;
+
+    }
+
+    const restante = Math.max(
+
+      Math.floor(
+
+        (
+          new Date(expira).getTime() -
+          Date.now()
+        ) / 1000
+
+      ),
+
+      0
+
+    );
+
+    setSegundos(restante);
+
+  }
+
+  function formatearTiempo(total: number) {
+
+    const minutos = Math.floor(total / 60);
+
+    const segundos = total % 60;
+
+    return `${String(minutos).padStart(2, "0")}:${String(segundos).padStart(2, "0")}`;
+
+  }
 
   useEffect(() => {
 
     async function cargar() {
 
       const { data } = await supabase
+
         .from("sesiones")
-        .select("qr,estado,nombre,telefono")
+
+        .select("qr,estado,nombre,telefono,qr_expira_en")
+
         .eq("id", id)
+
         .single();
 
-      if (!data) return;
+      if (!data)
+        return;
 
       setQr(data.qr);
+
       setEstado(data.estado);
+
+      calcularTiempo(data.qr_expira_en);
 
     }
 
@@ -38,22 +86,37 @@ export default function Conectar({
     const intervalo = setInterval(cargar, 1000);
 
     const canal = supabase
+
       .channel(`sesion-${id}`)
+
       .on(
+
         "postgres_changes",
+
         {
+
           event: "UPDATE",
+
           schema: "public",
+
           table: "sesiones",
-          filter: `id=eq.${id}`,
+
+          filter: `id=eq.${id}`
+
         },
+
         (payload: any) => {
 
           setQr(payload.new.qr);
+
           setEstado(payload.new.estado);
 
+          calcularTiempo(payload.new.qr_expira_en);
+
         }
+
       )
+
       .subscribe();
 
     return () => {
@@ -65,6 +128,21 @@ export default function Conectar({
     };
 
   }, [id]);
+
+  useEffect(() => {
+
+    if (segundos <= 0)
+      return;
+
+    const interval = setInterval(() => {
+
+      setSegundos((s) => Math.max(s - 1, 0));
+
+    }, 1000);
+
+    return () => clearInterval(interval);
+
+  }, [segundos]);
 
   if (estado === "conectado") {
 
@@ -132,27 +210,33 @@ export default function Conectar({
 
         </div>
 
+        <div className="contador">
+
+          ⏳ Expira en <b>{formatearTiempo(segundos)}</b>
+
+        </div>
+
         {
 
           qr ?
 
-          <img
+            <img
 
-            className="qr"
+              className="qr"
 
-            src={qr}
+              src={qr}
 
-            alt="QR"
+              alt="QR"
 
-          />
+            />
 
-          :
+            :
 
-          <div className="loading">
+            <div className="loading">
 
-            Generando código QR...
+              Generando código QR...
 
-          </div>
+            </div>
 
         }
 

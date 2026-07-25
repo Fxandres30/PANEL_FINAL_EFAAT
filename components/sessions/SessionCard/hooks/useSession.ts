@@ -19,6 +19,8 @@ export function useSession(
 
     const [qr, setQr] = useState("");
 
+    const [segundos, setSegundos] = useState(120);
+
     const [estadoActual, setEstadoActual] =
         useState(estadoInicial);
 
@@ -27,6 +29,39 @@ export function useSession(
         setEstadoActual(estadoInicial);
 
     }, [estadoInicial]);
+
+    // ============================================
+    // CONTADOR
+    // ============================================
+
+    useEffect(() => {
+
+        if (!open)
+            return;
+
+        const interval = setInterval(() => {
+
+            setSegundos((actual) => {
+
+                if (actual <= 1) {
+
+                    clearInterval(interval);
+
+                    setOpen(false);
+
+                    return 0;
+
+                }
+
+                return actual - 1;
+
+            });
+
+        }, 1000);
+
+        return () => clearInterval(interval);
+
+    }, [open]);
 
     async function accionPrincipal() {
 
@@ -55,10 +90,26 @@ export function useSession(
 
             if (!data?.qr)
                 return;
-
             setQr(data.qr);
 
-            setOpen(true);
+if (data.qr_expira_en) {
+
+    const restante = Math.max(
+        Math.floor(
+            (new Date(data.qr_expira_en).getTime() - Date.now()) / 1000
+        ),
+        0
+    );
+
+    setSegundos(restante);
+
+} else {
+
+    setSegundos(120);
+
+}
+
+setOpen(true);
 
             return;
 
@@ -106,28 +157,30 @@ export function useSession(
 
                     const sesion = payload.new;
 
-                    setEstadoActual(
-                        sesion.estado
-                    );
+                    setEstadoActual(sesion.estado);
 
-                    // ==========================
-                    // ACTUALIZAR QR
-                    // ==========================
                     if (
-                        sesion.estado === "esperando_qr" &&
-                        sesion.qr
-                    ) {
+    sesion.estado === "esperando_qr" &&
+    sesion.qr
+) {
 
-                        // Solo actualiza la imagen.
-                        // No abre el modal.
+    setQr(sesion.qr);
 
-                        setQr(sesion.qr);
+    if (sesion.qr_expira_en) {
 
-                    }
+        const restante = Math.max(
+            Math.floor(
+                (new Date(sesion.qr_expira_en).getTime() - Date.now()) / 1000
+            ),
+            0
+        );
 
-                    // ==========================
-                    // CONECTADO
-                    // ==========================
+        setSegundos(restante);
+
+    }
+
+}
+
                     if (
                         sesion.estado === "conectado"
                     ) {
@@ -136,11 +189,10 @@ export function useSession(
 
                         setQr("");
 
+                        setSegundos(120);
+
                     }
 
-                    // ==========================
-                    // DESCONECTADO
-                    // ==========================
                     if (
                         sesion.estado === "desconectado"
                     ) {
@@ -148,6 +200,8 @@ export function useSession(
                         setOpen(false);
 
                         setQr("");
+
+                        setSegundos(120);
 
                     }
 
@@ -174,6 +228,8 @@ export function useSession(
         open,
 
         qr,
+
+        segundos,
 
         estadoActual,
 

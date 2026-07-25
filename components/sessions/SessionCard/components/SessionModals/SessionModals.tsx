@@ -12,6 +12,8 @@ interface Props {
 
     sessionId: string;
 
+    segundos: number;
+
     cerrarQR: () => void;
 
     renameOpen: boolean;
@@ -33,6 +35,8 @@ export default function SessionModals({
     qr,
 
     sessionId,
+
+    segundos,
 
     cerrarQR,
 
@@ -59,6 +63,8 @@ export default function SessionModals({
                 qr={qr}
 
                 sessionId={sessionId}
+
+                segundos={segundos}
 
                 onClose={cerrarQR}
 
