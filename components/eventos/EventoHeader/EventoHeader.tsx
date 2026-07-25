@@ -1,77 +1,32 @@
 import "./EventoHeader.css";
 
-import { EventosProps } from "../types";
-
-export default function EventoHeader({
-
-    eventos
-
-}:EventosProps){
-
-    const activos=
-        eventos.filter(e=>e.estado==="abierto").length;
+export default function EventoHeader(){
 
     return(
 
         <header className="eventoHeader">
 
-            <div className="headerLeft">
+            <div>
 
-                <div className="iconContainer">
+                <h1>
 
-                    🎯
+                    🎯 Eventos
 
-                </div>
+                </h1>
 
-                <div className="headerInfo">
+                <p>
 
-                    <h1>
+                    Administra todos los eventos activos del sistema.
 
-                        Eventos
-
-                    </h1>
-
-                    <span>
-
-                        {eventos.length} registrado(s)
-
-                        •
-
-                        {activos} activo(s)
-
-                    </span>
-
-                </div>
+                </p>
 
             </div>
 
-            <div className="headerRight">
+            <button>
 
-                <button className="refreshButton">
+                + Nuevo Evento
 
-                    🔄
-
-                    <span>
-
-                        Actualizar
-
-                    </span>
-
-                </button>
-
-                <button className="newButton">
-
-                    ➕
-
-                    <span>
-
-                        Nuevo Evento
-
-                    </span>
-
-                </button>
-
-            </div>
+            </button>
 
         </header>
 

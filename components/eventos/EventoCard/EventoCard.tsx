@@ -1,41 +1,41 @@
 import "./EventoCard.css";
 
-import EventoHeaderCard from "./Header/EventoHeaderCard";
-import EventoInfo from "./Info/EventoInfo";
-import EventoGrupo from "./Grupo/EventoGrupo";
-import EventoStatsCard from "./Estadisticas/EventoStatsCard";
-import EventoFooter from "./Footer/EventoFooter";
+import EventoHeader from "./Header/EventoHeader";
+import EventoOverview from "./Overview/EventoOverview";
+import EventoPremios from "./Premios/EventoPremios";
 
-import { EventoProps } from "../types";
+interface Props {
+
+    evento: any;
+
+}
 
 export default function EventoCard({
 
     evento
 
-}: EventoProps) {
+}: Props) {
 
     return (
 
         <article className="eventoCard">
 
-            <EventoHeaderCard
+            {/* Encabezado */}
+
+            <EventoHeader
                 evento={evento}
             />
 
-            <EventoInfo
+            {/* Resumen */}
+
+            <EventoOverview
                 evento={evento}
             />
 
-            <EventoGrupo
-                evento={evento}
-            />
+            {/* Premios */}
 
-            <EventoStatsCard
-                evento={evento}
-            />
-
-            <EventoFooter
-                evento={evento}
+            <EventoPremios
+                premios={evento.premios}
             />
 
         </article>
