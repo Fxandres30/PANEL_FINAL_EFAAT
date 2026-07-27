@@ -35,8 +35,8 @@ export default function EventoCard({
             {/* Premios */}
 
             <EventoPremios
-                premios={evento.premios}
-            />
+    premios={evento?.premios ?? []}
+/>
 
         </article>
 
